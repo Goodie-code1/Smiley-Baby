@@ -1,196 +1,139 @@
+// ===============================
 // LOADER
-
+// ===============================
 window.addEventListener("load", () => {
-
     const loader = document.getElementById("loader");
 
-    loader.style.opacity = "0";
-
     setTimeout(() => {
-        loader.style.display = "none";
-    }, 500);
-
+        loader.style.opacity = "0";
+        loader.style.visibility = "hidden";
+    }, 800);
 });
 
 
-// MOBILE MENU
-
+// ===============================
+// MOBILE MENU TOGGLE
+// ===============================
 const hamburger = document.querySelector(".hamburger");
 const mobileMenu = document.querySelector(".mobile-menu");
 
 hamburger.addEventListener("click", () => {
-
     mobileMenu.classList.toggle("active");
-
 });
 
 
-// CLOSE MOBILE MENU WHEN LINK IS CLICKED
-
+// Close mobile menu when clicking a link
 document.querySelectorAll(".mobile-menu a").forEach(link => {
-
     link.addEventListener("click", () => {
-
         mobileMenu.classList.remove("active");
-
     });
-
 });
 
 
-// COPY CONTRACT ADDRESS
-
-const copyBtn = document.getElementById("copyBtn");
-
-if (copyBtn) {
-
-    copyBtn.addEventListener("click", () => {
-
-        const contractText =
-            document.getElementById("contractText").innerText;
-
-        navigator.clipboard.writeText(contractText);
-
-        const toast = document.getElementById("toast");
-
-        toast.classList.add("show");
-
-        copyBtn.innerText = "Copied! ✅";
-
-        setTimeout(() => {
-
-            toast.classList.remove("show");
-
-            copyBtn.innerText = "Copy CA";
-
-        }, 3000);
-
-    });
-
-}
-
-
-// SMOOTH SCROLL
-
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-
-    anchor.addEventListener("click", function (e) {
-
-        e.preventDefault();
-
-        const target =
-            document.querySelector(this.getAttribute("href"));
-
-        if (target) {
-
-            target.scrollIntoView({
-                behavior: "smooth"
-            });
-
-        }
-
-    });
-
-});
-
-
-// REVEAL ANIMATION
-
-const reveals = document.querySelectorAll(".reveal");
-
-function revealSections() {
-
-    reveals.forEach(section => {
-
-        const windowHeight = window.innerHeight;
-
-        const sectionTop =
-            section.getBoundingClientRect().top;
-
-        if (sectionTop < windowHeight - 100) {
-
-            section.classList.add("active");
-
-        }
-
-    });
-
-}
-
-window.addEventListener("scroll", revealSections);
-
-revealSections();
-
-
-// ACTIVE NAVIGATION LINKS
-
-const sections = document.querySelectorAll("section[id]");
+// ===============================
+// SMOOTH ACTIVE NAV LINK (SCROLL SPY)
+// ===============================
+const sections = document.querySelectorAll("section, header");
 const navLinks = document.querySelectorAll(".nav-links a");
 
 window.addEventListener("scroll", () => {
-
     let current = "";
 
     sections.forEach(section => {
-
         const sectionTop = section.offsetTop - 120;
+        const sectionHeight = section.clientHeight;
 
-        if (scrollY >= sectionTop) {
-
-            current = section.getAttribute("id");
-
+        if (pageYOffset >= sectionTop) {
+            current = section.getAttribute("id") || "hero";
         }
-
     });
 
     navLinks.forEach(link => {
-
         link.classList.remove("active");
-
-        if (
-            link.getAttribute("href") === "#" + current
-        ) {
+        if (link.getAttribute("href").includes(current)) {
             link.classList.add("active");
         }
-
     });
-
 });
 
 
-// TOKENOMICS COUNTER
+// ===============================
+// REVEAL ON SCROLL (ANIMATIONS)
+// ===============================
+const revealElements = document.querySelectorAll(".reveal");
 
-const counters = document.querySelectorAll(".counter");
+const revealOnScroll = () => {
+    const triggerBottom = window.innerHeight * 0.85;
 
-counters.forEach(counter => {
+    revealElements.forEach(el => {
+        const elementTop = el.getBoundingClientRect().top;
 
-    const target =
-        Number(counter.getAttribute("data-target"));
-
-    const updateCounter = () => {
-
-        const current =
-            Number(counter.innerText.replace(/,/g, ""));
-
-        const increment = target / 100;
-
-        if (current < target) {
-
-            counter.innerText =
-                Math.ceil(current + increment)
-                .toLocaleString();
-
-            requestAnimationFrame(updateCounter);
-
-        } else {
-
-            counter.innerText =
-                target.toLocaleString();
-
+        if (elementTop < triggerBottom) {
+            el.classList.add("active");
         }
+    });
+};
 
-    };
+window.addEventListener("scroll", revealOnScroll);
+window.addEventListener("load", revealOnScroll);
 
-    updateCounter();
 
+// ===============================
+// COPY CONTRACT ADDRESS
+// ===============================
+const copyBtn = document.getElementById("copyBtn");
+const contractText = document.getElementById("contractText");
+const toast = document.getElementById("toast");
+
+copyBtn.addEventListener("click", async () => {
+    const text = contractText.textContent.trim();
+
+    try {
+        await navigator.clipboard.writeText(text);
+
+        // Show toast
+        toast.classList.add("show");
+
+        setTimeout(() => {
+            toast.classList.remove("show");
+        }, 2000);
+
+    } catch (err) {
+        console.error("Copy failed:", err);
+    }
+});
+
+
+// ===============================
+// NAVBAR SCROLL EFFECT
+// ===============================
+const navbar = document.querySelector(".navbar");
+
+window.addEventListener("scroll", () => {
+    if (window.scrollY > 50) {
+        navbar.style.background = "rgba(0,0,0,0.95)";
+        navbar.style.boxShadow = "0 5px 20px rgba(0,0,0,0.3)";
+    } else {
+        navbar.style.background = "rgba(0,0,0,0.85)";
+        navbar.style.boxShadow = "none";
+    }
+});
+
+
+// ===============================
+// SMOOTH SCROLL FIX (for older browsers)
+// ===============================
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener("click", function (e) {
+        e.preventDefault();
+
+        const target = document.querySelector(this.getAttribute("href"));
+
+        if (target) {
+            target.scrollIntoView({
+                behavior: "smooth",
+                block: "start"
+            });
+        }
+    });
 });
