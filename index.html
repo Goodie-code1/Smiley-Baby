@@ -1,0 +1,311 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmileyBaby ($SMLY) | The Happiest Meme on Solana</title>
+
+    <link rel="stylesheet" href="styles.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- Loader -->
+    <div id="loader">
+        <div class="spinner"></div>
+    </div>
+
+    <!-- Toast -->
+    <div id="toast">
+        Contract Address Copied Successfully! ✅
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+
+            <a href="#" class="logo">
+                <img src="images/smileybaby-logo.png" alt="SmileyBaby Logo">
+            </a>
+
+            <ul class="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#tokenomics">Tokenomics</a></li>
+                <li><a href="#roadmap">Roadmap</a></li>
+                <li><a href="#community">Community</a></li>
+            </ul>
+
+            <a href="#" class="buy-btn">
+                Buy $SMLY
+            </a>
+
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu">
+
+        <a href="#about">About</a>
+        <a href="#tokenomics">Tokenomics</a>
+        <a href="#roadmap">Roadmap</a>
+        <a href="#community">Community</a>
+
+        <a href="#" class="mobile-buy-btn">
+            Buy $SMLY
+        </a>
+
+    </div>
+
+    <!-- Hero -->
+    <header class="hero">
+
+        <div class="floating floating-1">😊</div>
+        <div class="floating floating-2">🚀</div>
+        <div class="floating floating-3">✨</div>
+        <div class="floating floating-4">💰</div>
+
+        <div class="hero-content">
+
+            <img
+                src="images/smileybaby-mascot.png"
+                alt="SmileyBaby Mascot"
+                class="mascot"
+            >
+
+            <h1>
+                The Happiest Meme on Solana 😊
+            </h1>
+
+            <p>
+                Just Smile.
+            </p>
+
+            <div class="hero-buttons">
+
+                <a href="#" class="primary-btn">
+                    Buy $SMLY
+                </a>
+
+                <a href="#community" class="secondary-btn">
+                    Join Community
+                </a>
+
+            </div>
+
+        </div>
+
+    </header>
+
+    <!-- Mission -->
+    <section class="section reveal">
+
+        <div class="container">
+
+            <h2>
+                Why SmileyBaby Exists
+            </h2>
+
+            <p>
+                SmileyBaby isn’t just another meme coin. We’re here to build something people genuinely enjoy being part of. Together, we’ll grow step by step, build trust, and create lasting value through an active and supportive community.
+            </p>
+
+        </div>
+
+    </section>
+
+    <!-- About -->
+    <section id="about" class="section reveal">
+
+        <div class="container">
+
+            <h2>About SmileyBaby</h2>
+
+            <div class="glass-card">
+
+                <p>
+                    The vision of Smiley Baby is to build a positive, fun, and long-term community on Solana.
+                </p>
+
+                <p>
+                    We don’t want to be just another pump-and-dump meme coin. We want to create something that people genuinely enjoy being part of.
+                </p>
+
+                <p>
+                    Our goal is to grow step by step, build trust, and create lasting value through an active and supportive community.
+                </p>
+
+                <h3>
+                    Just Smile. 😊
+                </h3>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- Tokenomics -->
+    <section id="tokenomics" class="section reveal">
+
+        <div class="container">
+
+            <h2>Tokenomics</h2>
+
+            <div class="token-grid">
+
+                <div class="token-card">
+
+                    <h3>Total Supply</h3>
+
+                    <span
+                        class="counter"
+                        data-target="1000000000">
+                        0
+                    </span>
+
+                    <p>$SMLY</p>
+
+                </div>
+
+                <div class="token-card">
+
+                    <h3>Total Tokens Held</h3>
+
+                    <span
+                        class="counter"
+                        data-target="26040000">
+                        0
+                    </span>
+
+                    <p>$SMLY</p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- Contract -->
+    <section class="section reveal">
+
+        <div class="container">
+
+            <h2>
+                Contract Address
+            </h2>
+
+            <div class="contract-card">
+
+                <code id="contractText">
+                    6ehq2ijJj3gnsC9Y5XD5GsUayrXLBw45HTc6mUecpump
+                </code>
+
+                <button id="copyBtn">
+                    Copy CA
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- Roadmap -->
+    <section id="roadmap" class="section reveal">
+
+        <div class="container">
+
+            <h2>
+                Roadmap
+            </h2>
+
+            <div class="roadmap-grid">
+
+                <div class="roadmap-card">
+                    <h3>Phase 1</h3>
+                    <p>Foundation</p>
+                </div>
+
+                <div class="roadmap-card">
+                    <h3>Phase 2</h3>
+                    <p>Community Growth</p>
+                </div>
+
+                <div class="roadmap-card">
+                    <h3>Phase 3</h3>
+                    <p>Marketing</p>
+                </div>
+
+                <div class="roadmap-card">
+                    <h3>Phase 4</h3>
+                    <p>Scaling</p>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- Community -->
+    <section id="community" class="section reveal">
+
+        <div class="container">
+
+            <h2>
+                Join The Community
+            </h2>
+
+            <div class="community-grid">
+
+                <a
+                    href="https://t.me/smiLeybabysol1"
+                    target="_blank"
+                    class="community-card"
+                >
+                    Telegram
+                </a>
+
+                <a
+                    href="https://x.com/smileybabysol10"
+                    target="_blank"
+                    class="community-card"
+                >
+                    X (Twitter)
+                </a>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- Footer -->
+    <footer>
+
+        <img
+            src="images/smileybaby-logo.png"
+            alt="SmileyBaby Logo"
+        >
+
+        <p>
+            Built with smiles on Solana 😊
+        </p>
+
+    </footer>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
+```
