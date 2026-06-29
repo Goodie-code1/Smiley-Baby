@@ -101,7 +101,7 @@ body{
 }
 
 .logo img{
-    height:55px;
+    height:70px;
 }
 
 .nav-links{
@@ -201,10 +201,11 @@ body{
     align-items:center;
     text-align:center;
     padding:120px 20px 80px;
+    .hero{
     background:
     radial-gradient(circle at top,
-    rgba(255,215,0,.2),
-    transparent 35%),
+    rgba(255,215,0,.35),
+    transparent 40%),
     #080808;
 }
 
@@ -472,4 +473,15 @@ footer img{
     .contract-card{
         flex-direction:column;
     }
+}
+.hero-badge{
+    display:inline-block;
+    padding:10px 20px;
+    border:1px solid rgba(255,215,0,.4);
+    background:rgba(255,215,0,.08);
+    border-radius:50px;
+    color:var(--gold);
+    font-size:.9rem;
+    font-weight:600;
+    margin-bottom:25px;
 }
