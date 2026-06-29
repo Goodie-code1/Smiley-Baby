@@ -1,184 +1,144 @@
-// =========================
-// Loader
-// =========================
+// LOADER
 
 window.addEventListener("load", () => {
+
     const loader = document.getElementById("loader");
 
+    loader.style.opacity = "0";
+
     setTimeout(() => {
-        loader.style.opacity = "0";
-
-        setTimeout(() => {
-            loader.style.display = "none";
-        }, 500);
-
+        loader.style.display = "none";
     }, 500);
+
 });
 
 
-// =========================
-// Mobile Menu
-// =========================
+// MOBILE MENU
 
 const hamburger = document.querySelector(".hamburger");
 const mobileMenu = document.querySelector(".mobile-menu");
 
 hamburger.addEventListener("click", () => {
+
     mobileMenu.classList.toggle("active");
+
 });
 
 
-// Close menu after clicking link
+// CLOSE MOBILE MENU WHEN LINK IS CLICKED
 
 document.querySelectorAll(".mobile-menu a").forEach(link => {
 
     link.addEventListener("click", () => {
+
         mobileMenu.classList.remove("active");
+
     });
 
 });
 
 
-// =========================
-// Copy Contract Address
-// =========================
+// COPY CONTRACT ADDRESS
 
 const copyBtn = document.getElementById("copyBtn");
 
-copyBtn.addEventListener("click", () => {
+if (copyBtn) {
 
-    const contractText =
-        document.getElementById("contractText").textContent.trim();
+    copyBtn.addEventListener("click", () => {
 
-    navigator.clipboard.writeText(contractText);
+        const contractText =
+            document.getElementById("contractText").innerText;
 
-    copyBtn.textContent = "Copied! ✅";
+        navigator.clipboard.writeText(contractText);
 
-    const toast = document.getElementById("toast");
+        const toast = document.getElementById("toast");
 
-    toast.classList.add("show");
+        toast.classList.add("show");
 
-    setTimeout(() => {
-        toast.classList.remove("show");
-    }, 3000);
+        copyBtn.innerText = "Copied! ✅";
 
-    setTimeout(() => {
-        copyBtn.textContent = "Copy CA";
-    }, 3000);
+        setTimeout(() => {
 
-});
+            toast.classList.remove("show");
 
+            copyBtn.innerText = "Copy CA";
 
-// =========================
-// Animated Counters
-// =========================
+        }, 3000);
 
-const counters = document.querySelectorAll(".counter");
-
-const animateCounter = (counter) => {
-
-    const target =
-        Number(counter.getAttribute("data-target"));
-
-    let current = 0;
-
-    const increment = target / 150;
-
-    const updateCounter = () => {
-
-        current += increment;
-
-        if (current < target) {
-
-            counter.textContent =
-                Math.floor(current).toLocaleString();
-
-            requestAnimationFrame(updateCounter);
-
-        } else {
-
-            counter.textContent =
-                target.toLocaleString();
-
-        }
-    };
-
-    updateCounter();
-};
-
-const counterObserver =
-new IntersectionObserver((entries) => {
-
-    entries.forEach(entry => {
-
-        if (entry.isIntersecting) {
-
-            animateCounter(entry.target);
-
-            counterObserver.unobserve(entry.target);
-        }
     });
 
-}, {
-    threshold: 0.5
-});
-
-counters.forEach(counter => {
-    counterObserver.observe(counter);
-});
+}
 
 
-// =========================
-// Scroll Reveal Animation
-// =========================
+// SMOOTH SCROLL
 
-const revealElements =
-document.querySelectorAll(".reveal");
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 
-const revealObserver =
-new IntersectionObserver((entries) => {
+    anchor.addEventListener("click", function (e) {
 
-    entries.forEach(entry => {
+        e.preventDefault();
 
-        if (entry.isIntersecting) {
+        const target =
+            document.querySelector(this.getAttribute("href"));
 
-            entry.target.classList.add("active");
+        if (target) {
+
+            target.scrollIntoView({
+                behavior: "smooth"
+            });
+
         }
 
     });
 
-}, {
-    threshold: 0.15
-});
-
-revealElements.forEach(element => {
-    revealObserver.observe(element);
 });
 
 
-// =========================
-// Active Navigation
-// =========================
+// REVEAL ANIMATION
 
-const sections =
-document.querySelectorAll("section");
+const reveals = document.querySelectorAll(".reveal");
 
-const navLinks =
-document.querySelectorAll(".nav-links a");
+function revealSections() {
+
+    reveals.forEach(section => {
+
+        const windowHeight = window.innerHeight;
+
+        const sectionTop =
+            section.getBoundingClientRect().top;
+
+        if (sectionTop < windowHeight - 100) {
+
+            section.classList.add("active");
+
+        }
+
+    });
+
+}
+
+window.addEventListener("scroll", revealSections);
+
+revealSections();
+
+
+// ACTIVE NAVIGATION LINKS
+
+const sections = document.querySelectorAll("section[id]");
+const navLinks = document.querySelectorAll(".nav-links a");
 
 window.addEventListener("scroll", () => {
 
-    let currentSection = "";
+    let current = "";
 
     sections.forEach(section => {
 
-        const sectionTop =
-            section.offsetTop - 150;
+        const sectionTop = section.offsetTop - 120;
 
-        if (window.scrollY >= sectionTop) {
+        if (scrollY >= sectionTop) {
 
-            currentSection =
-                section.getAttribute("id");
+            current = section.getAttribute("id");
+
         }
 
     });
@@ -188,67 +148,49 @@ window.addEventListener("scroll", () => {
         link.classList.remove("active");
 
         if (
-            link.getAttribute("href") ===
-            `#${currentSection}`
+            link.getAttribute("href") === "#" + current
         ) {
-
             link.classList.add("active");
         }
+
     });
 
 });
 
 
-// =========================
-// Navbar Background Effect
-// =========================
+// TOKENOMICS COUNTER
 
-const navbar =
-document.querySelector(".navbar");
+const counters = document.querySelectorAll(".counter");
 
-window.addEventListener("scroll", () => {
+counters.forEach(counter => {
 
-    if (window.scrollY > 50) {
+    const target =
+        Number(counter.getAttribute("data-target"));
 
-        navbar.style.background =
-            "rgba(0,0,0,0.92)";
+    const updateCounter = () => {
 
-    } else {
+        const current =
+            Number(counter.innerText.replace(/,/g, ""));
 
-        navbar.style.background =
-            "rgba(0,0,0,0.75)";
-    }
+        const increment = target / 100;
 
-});
+        if (current < target) {
 
+            counter.innerText =
+                Math.ceil(current + increment)
+                .toLocaleString();
 
-// =========================
-// Smooth Internal Scrolling
-// =========================
+            requestAnimationFrame(updateCounter);
 
-document
-.querySelectorAll('a[href^="#"]')
-.forEach(anchor => {
+        } else {
 
-    anchor.addEventListener("click", function(e) {
+            counter.innerText =
+                target.toLocaleString();
 
-        const targetId =
-            this.getAttribute("href");
-
-        if (targetId === "#") return;
-
-        e.preventDefault();
-
-        const target =
-            document.querySelector(targetId);
-
-        if (target) {
-
-            target.scrollIntoView({
-                behavior: "smooth"
-            });
         }
 
-    });
+    };
+
+    updateCounter();
 
 });
